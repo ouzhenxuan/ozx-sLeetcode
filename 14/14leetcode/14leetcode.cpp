@@ -11,26 +11,19 @@ string longestCommonPrefix(vector<string>& strs) {
 	{
 		return "";
 	}
-	if (strs.size() == 1)
+	
+	string first = strs[0]; 
+	for (int j = 1; j < strs.size(); j++)
 	{
-		return strs[0];
-	}
-	string first = strs[0];
-	for (int i = 1; i <= first.length(); i++)
-	{
-		string compare = first.substr(0, i);
-
-		
-		for (int j = 1; j < strs.size(); j++)
+		while (strs[j].find(first) != 0)
 		{
-
-			string tempVar = strs[j];
-			int result = tempVar.find(compare);
-			if (tempVar.find(compare) != 0) {
-				return first.substr(0, i - 1);
+			first = first.substr(0, first.length() - 1);
+			if (first.length() == 0)
+			{
+				return "";
 			}
-		} 
-	}
+		}
+	}  
 	return first;
 
 }
