@@ -11,25 +11,7 @@ using namespace std;
      ListNode(int x) : val(x), next(NULL) {}
  };
  
-
- ListNode* swag(ListNode* l1, int num) {
-	 
-	 if (num <= l1->val )
-	 {
-		 ListNode* temp = new ListNode(num);
-		 temp->next = l1;
-		 return temp;
-	 }
-	 else if(l1->next == NULL)
-	 {
-		 ListNode* temp = new ListNode(num);
-		 l1->next = temp;
-		 return l1;
-	 }
-	 l1->next = swag(l1->next, num);
-	 return l1;
- }
-
+  
 ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
 	if (l1 == NULL) {
 		return l2;
@@ -38,13 +20,16 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
 	{
 		return l1;
 	}
-	
-	while (l2 != NULL)
+	else if (l1->val < l2->val)
 	{
-		l1 = swag(l1, l2->val);
-		l2 = l2->next;
+		 l1->next = mergeTwoLists(l1->next, l2);
+		 return l1;
+	}
+	else
+	{
+		l2->next = mergeTwoLists(l1, l2->next);
+		return l2;
 	} 
-	return l1;
 }
 
 ListNode* setNext(
@@ -61,8 +46,8 @@ int main()
 {
 	cout << "Hello CMake。" << endl;
 
-	int numArray1[3] = { 4,5,6 };
-	int numArray2[3] = { 1,2,3 };
+	int numArray1[3] = { 1, 2, 3 };
+	int numArray2[3] = { 4,5,6 };
 	ListNode* l1 = NULL	;
 	ListNode* l2 = NULL	;
 	for each (int num in numArray1)
@@ -72,8 +57,7 @@ int main()
 			l1 = new ListNode(num);
 		}
 		else
-		{
-			//l1->next = new ListNode(num);
+		{ 
 			setNext(l1, num);
 		}
 	}
