@@ -8,21 +8,22 @@ using namespace std;
 
 
 int removeElement(vector<int>& nums, int val) {
-	int flag = 0;
-	for (int i = 0; i < nums.size(); i++)
-	{
-		if (nums[i] != val)
-		{
-			nums[flag] = nums[i];
-			flag++;
+	int i = 0;
+	int j = nums.size();
+	while (i < j) {
+		if (nums[i] == val) {
+			nums[i] = nums[j-1];
+			--j;
+		} else {
+			++i;
 		}
 	}
-	return flag;
+	return j;
 }
 
 int main()
 {
-	vector<int> nums = { 0,1};
+	vector<int> nums = { 0,1,2,2,3,0,4,2 };
 	
 	cout << "Hello CMake。" << endl;
 	cout << removeElement(nums, 2);
