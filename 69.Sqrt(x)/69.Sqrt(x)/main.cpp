@@ -35,12 +35,30 @@ int mySqrt(int x) {
 }
 */
 
-
-
 /// 二分查找
 /// @param x 开方数
 int mySqrt(int x) {
-    return 0;
+    if(x < 2){
+        return x ;
+    }
+    double left = 0;
+    double right = x/2.0;
+//    double right = x;
+    double mid = (left + right)/2;
+    while ((int)left<(int)right) {//可能因为double精度问题导致死循环。所以用int强转
+
+        double sq = mid * mid;
+        if (sq < x) {
+            left = mid;
+            mid = (left + right)/2;
+        }else if(sq > x){
+            right = mid;
+            mid = (left + right)/2;
+        }else{
+            return mid;
+        }
+    }
+    return mid;
 }
 
 int main(int argc, const char * argv[]) {
